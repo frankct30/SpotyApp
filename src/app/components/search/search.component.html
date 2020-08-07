@@ -1,0 +1,6 @@
+<input #termino (keyup)="buscar(termino.value)" class="form-control mr-sm-2 box-search" type="search" placeholder="Buscar" aria-label="Search">
+<hr>
+<div class="container">
+    <clq-loading *ngIf="loading"></clq-loading>
+    <clq-cards [items]="artists"></clq-cards>
+</div>

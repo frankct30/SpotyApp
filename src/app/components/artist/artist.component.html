@@ -1,0 +1,47 @@
+<div class="container">
+    <clq-loading *ngIf="loadingArtist"></clq-loading>
+</div>
+<div class="container" *ngIf="!loadingArtist">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+        <div class="col">
+            <img [src]="artist.images | noimage" class="img-thumbnail rounded-circle">
+        </div>
+        <div class="col">
+            <h3>{{artist.name}}</h3>
+            <p>
+                <a [href]="artist.external_urls.spotify" target="_blank">
+                    Ir a la pagina del artista
+                </a>
+            </p>
+        </div>
+        <div class="col">
+            <button routerLink="/search" class="btn btn-outline-primary">Regresar</button>
+        </div>
+    </div>
+
+    <div class="table-responsive-sm">
+
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col" class="d-none d-sm-block">Foto</th>
+                    <th scope="col" class="d-none d-sm-block">Album</th>
+                    <th scope="col" class="d-none d-sm-block">Canción</th>
+                    <th scope="col">Vista Previa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let track of tracks">
+                    <th class="d-none d-sm-block"><img [src]="track.album.images | noimage" class="img-thumb" /></th>
+                    <th class="d-none d-sm-block">{{track.album.name}}</th>
+                    <th class="d-none d-sm-block">{{track.name}}</th>
+                    <th>
+                        <!--<audio [src]="track.preview_url" controls></audio>-->
+                        <iframe [src]="track.uri | domseguro: 'https://open.spotify.com/embed?uri='" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
